@@ -1,7 +1,9 @@
 <div id="root"></div>
 <script src="https://unpkg.com/react@16.3.0/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@16.3.0/umd/react-dom.development.js"></script>
-<script>
+<script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+<script type="text/babel">
+	// 01
 	// create element with vanilla js
 	// const rootElement = document.getElementById('root')
 	// const element = document.createElement('div')
@@ -10,9 +12,18 @@
 	// rootElement.appendChild(element)
 
 	// create element the react way
+	// need to import react and react DOM
+	// const rootElement = document.getElementById('root')
+	// const element =React.createElement('div', {className: 'container'}, 'Hello world')
+	// console.log(element)
+	// ReactDOM.render(element, rootElement)
+
+	// 02
+	// create element the jsx way
+	// jsx needs to be transpiled, usually would be transpiled as part of build process
+	// this time we'll be importing babel in a script tag
 	const rootElement = document.getElementById('root')
-	const element =React.createElement('div', {className: 'container'}, 'Hello world')
-	console.log(element)
+	const element = <div className="container">Hello world</div>
 	ReactDOM.render(element, rootElement)
 
 </script>
