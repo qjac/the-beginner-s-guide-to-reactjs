@@ -93,6 +93,18 @@
 			</div>
 		)};
 
+
+		// validate proptypes
+	SayHello.propTypes = {
+		firstName(props, propName, componentName) {
+			if(typeof props[propName] !== 'string') {
+				return new Error(
+					`Pass a string for ${propName} in ${componentName}. You passed a ${typeof props[propName]}`
+					)
+			}
+		}
+	}
+
 	// it's expecting the prop to be a string not a boolean. results in incorrect rendering
 	ReactDOM.render(<SayHello firstName={true} />, rootElement)
 
