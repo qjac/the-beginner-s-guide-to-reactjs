@@ -4,6 +4,50 @@
 <script src="https://unpkg.com/react-dom@16.3.0/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
 <script type="text/babel">
+// 03
+// Create a Simple Reusable React Component
+	// 	using function call
+	// const rootElement = document.getElementById('root')
+
+	// const message = (props) => <div>{props.msg}</div>
+
+	// const element = (
+	// 	<div className="container">
+	// 	{message({msg: 'Hello World'})}
+	// 	{message({msg: 'Goodbye World'})}
+	// </div>
+	// );
+
+	// ReactDOM.render(element, rootElement);
+
+	// create simple reusable component with easier to read jsx
+	// const rootElement = document.getElementById('root')
+
+	// const Message = props => <div>{props.msg}</div>
+	// const element = (
+	// 	<div className="container">
+	// 		<Message msg='Hello World' />
+	// 		<Message msg='Goodbye World' />
+	// 	</div>
+	// );
+	// ReactDOM.render(element, rootElement);
+
+
+	// create simple reusable component with easier to read jsx using children instead of props
+	// const rootElement = document.getElementById('root')
+
+	// const Message = props => <div>{props.children}</div>
+	// const element = (
+	// 	<div className="container">
+	// 	<Message>
+	// 		Hello World
+	// 		<Message>Goodbye World</Message>
+	// 	</Message>
+	// 	</div>
+	// );
+	// ReactDOM.render(element, rootElement);
+
+// SOLUTION
 const rootElement = document.getElementById(
   'root',
 )

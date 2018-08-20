@@ -4,6 +4,36 @@
 <script src="https://unpkg.com/react-dom@16.3.0/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
 <script type="text/babel">
+// 05
+// Conditionally Render a React Component
+  // renders even if message content is null (renders empty div)
+  // function Message({message}) {
+  //  return <div>{message}</div>
+  // }
+  // ReactDOM.render(<Message message={null} />,
+  // document.getElementById('root'))
+
+  // render conditionally
+  // function Message({message}) {
+  //  if (!message) {return <div>No message</div>}
+  //  return <div>{message}</div>
+  // }
+  // ReactDOM.render(<Message message={null} />,
+  // document.getElementById('root'))
+
+  // with ternary and wrapped in a div
+  // function Message({message}) {
+  //  return (
+  //    <div>
+  //    {message ? (<div>{message}</div>) : (<div>No message</div>)}
+  //    </div>
+  //  )
+  // }
+  
+  // ReactDOM.render(<Message message="{null}" />,
+  // document.getElementById('root'))
+
+// SOLUTION
 function Message({message}) {
   return (
     <div>

@@ -3,6 +3,20 @@
 <script src="https://unpkg.com/react-dom@16.3.0/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
 <script type="text/babel">
+
+// 06
+// Rerender a React Application
+	// demo to show selective rerendering (fun to watch repaint in dev tools)
+	// const rootElement = document.getElementById('root')
+
+	// function tick() {
+	// 	const time = new Date().toLocaleTimeString()
+	// 	const element = <div>It is {time}.</div>
+	// 	ReactDOM.render(element, rootElement)
+	// }
+	// setInterval(tick, 1000)
+
+// SOLUTION
 const rootElement = document.getElementById('root')
 function tick() {
   const time = new Date().toLocaleTimeString()
