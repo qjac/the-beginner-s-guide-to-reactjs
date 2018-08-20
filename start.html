@@ -1,6 +1,7 @@
 <div id="root"></div>
 <script src="https://unpkg.com/react@16.3.0/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@16.3.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/prop-types@15.6.0/prop-types.js"></script>
 <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
 <script type="text/babel">
 	// 01
@@ -120,35 +121,82 @@
 	// ReactDOM.render(<SayHello firstName={true} />, rootElement)
 
 	// validate multiple props for correct proptype. pull it out into a function.
+	// const rootElement = document.getElementById('root')
+
+	// function SayHello(props) {
+	// 	return (
+	// 		<div>
+	// 		Hello {props.firstName} {props.lastName}!
+	// 		</div>
+	// 	)};
+
+	// // validate all string proptypes using function
+	// const PropTypes = {
+	// 	string(props, propName, componentName) {
+	// 		if(typeof props[propName] !== 'string') {
+	// 			return new Error(
+	// 				`Pass a string for ${propName} in ${componentName}. You passed a ${typeof props[propName]}!`
+	// 			)
+	// 		}
+	// 	},
+	// }
+
+	// SayHello.propTypes = {
+	// 	firstName: PropTypes.string,
+	// 	lastName: PropTypes.string,
+	// }
+
+	// // it's expecting the prop to be a string not a boolean. results in incorrect rendering
+	// ReactDOM.render(<SayHello firstName={true} />, rootElement)
+
+	// using the prop-types library
+	// https://reactjs.org/docs/typechecking-with-proptypes.html
+	// script to library pulled in at top of page. 
+
+	// const rootElement = document.getElementById('root')
+
+	// function SayHello(props) {
+	// 	return (
+	// 		<div>
+	// 		Hello {props.firstName} {props.lastName}!
+	// 		</div>
+	// 	)};
+
+	// // validation comes from imported prop-types package. custom function no longer needed
+	// SayHello.propTypes = {
+	// 	firstName: PropTypes.string.isRequired,
+	// 	lastName: PropTypes.string.isRequired,
+	// }
+
+	// // it's expecting the prop to be a string not a boolean. 
+	// // results in incorrect rendering. should throw an error.
+	// ReactDOM.render(<SayHello firstName={true} />, rootElement)
+
+// now with class component instead of function component. same great validating.
 	const rootElement = document.getElementById('root')
 
-	function SayHello(props) {
+	class SayHello extends React.Component {
+		 // works the same as having protype validated seperately, but more common to have it as static method in class component
+		static propTypes = {
+			firstName: PropTypes.string.isRequired,
+			lastName: PropTypes.string.isRequired,
+		}
+		render() {
+			const {firstName, lastName} = this.props
+		
 		return (
 			<div>
-			Hello {props.firstName} {props.lastName}!
+			Hello {firstName} {lastName}!
 			</div>
-		)};
-
-
-	// validate all string proptypes using function
-	const PropTypes = {
-		string(props, propName, componentName) {
-			if(typeof props[propName] !== 'string') {
-				return new Error(
-					`Pass a string for ${propName} in ${componentName}. You passed a ${typeof props[propName]}!`
-				)
-			}
-		},
+		)}
 	}
 
-	SayHello.propTypes = {
-		firstName: PropTypes.string,
-		lastName: PropTypes.string,
-	}
-
-	// it's expecting the prop to be a string not a boolean. results in incorrect rendering
+	// it's expecting the prop to be a string not a boolean. 
+	// results in incorrect rendering. should throw an error.
 	ReactDOM.render(<SayHello firstName={true} />, rootElement)
 
+	// propType checking only works with dev version of react. it's turned off for production to speed up app.
+	// can add babel-plugin-transform-react-remove-prop-types to build step to automatically remove proptype checking code from codebase in production to speed it up further.
 
 
 </script>
