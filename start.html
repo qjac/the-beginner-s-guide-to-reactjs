@@ -201,6 +201,7 @@
 	// propType checking only works with dev version of react. it's turned off for production to speed up app.
 	// can add babel-plugin-transform-react-remove-prop-types to build step to automatically remove proptype checking code from codebase in production to speed it up further.
 
+
 // 05
 // Conditionally Render a React Component
 	// renders even if message content is null (renders empty div)
@@ -230,6 +231,7 @@
 	// ReactDOM.render(<Message message="{null}" />,
 	// document.getElementById('root'))
 
+
 // 06
 // Rerender a React Application
 	// demo to show selective rerendering (fun to watch repaint in dev tools)
@@ -241,4 +243,178 @@
 	// 	ReactDOM.render(element, rootElement)
 	// }
 	// setInterval(tick, 1000)
+
+
+// 07
+// Style React Components with className and In-line Styles
+	// copied over the styles 
+	</script>
+	<style>
+		.box {
+		  border: 1px solid #333;
+		}
+
+		.box--large {
+		  width: 180px;
+		  height: 180px;
+		}
+
+		.box--medium {
+		  width: 120px;
+		  height: 120px;
+		}
+
+		.box--small {
+		  width: 60px;
+		  height: 60px;
+		}
+	</style>
+
+<script type="text/babel">
+	// // styles inline and adding classes directly in jsx
+	// const rootElement = document.getElementById('root')
+	// const element = (
+	// 	<div>
+
+	// 		<div 
+	// 			// add new classes like so
+	// 			className="box box--small"
+	// 			// add inline style in jsx as an object. for most tyle properties, numbers w/o unit will translate as px.
+	// 			style={{paddingLeft: '20px'}}>
+	// 			box
+	// 		</div>
+	// 	</div>
+	// 	)
+	// ReactDOM.render(element, rootElement)
+
+	// // adding styles via props. 
+	// const rootElement = document.getElementById('root')
+	// const props = {
+	// 	className: "box box--small",
+	// 	style: {paddingLeft: '20px'},
+	// }
+	// const element = (
+	// 	<div>
+	// 		// spreading props into div is equivalent to above.
+	// 		<div {...props}>box</div>
+	// 	</div>
+	// 	)
+	// ReactDOM.render(element, rootElement)
+
+	// // adding styles via props using object shorthand 
+	// const rootElement = document.getElementById('root')
+	// // note: can't use class as a variable name in js. throws an error and doesn't allow for destructuring
+	// const className = "box box--small";
+	// const props = {
+	// 	className, //object shorthand matches this variable name with it's object property
+	// 	style: {paddingLeft: '20px'},
+	// }
+	// const element = (
+	// 	<div>
+			
+	// 		<div {...props}>box</div>
+	// 	</div>
+	// 	)
+	// ReactDOM.render(element, rootElement)
+
+	// let's do it as a function component. equivalent to above
+	// const rootElement = document.getElementById('root')
+	// function Box(props) {
+	// 	return (
+	// 		<div
+	// 			className="box box--small"
+	// 			style={{paddingLeft: 20}}
+	// 			{...props}
+	// 			>
+	// 			box
+	// 		</div>
+	// 	)
+	// }
+	// ReactDOM.render(<Box />, rootElement)
+
+	// //  adding props to function component
+	// const rootElement = document.getElementById('root')
+	// function Box(props) {
+	// 	return (
+	// 		<div
+	// 			className="box box--small"
+	// 			style={{paddingLeft: 20}}
+	// 			{...props}
+	// 		/>
+	// 	)
+	// }
+
+	// const element = ( 
+	// 	<div>
+	// 		<Box style={{backgroundColor: 'aliceBlue'}}>small box</Box>
+	// 	</div>
+	// )
+	// ReactDOM.render(element, rootElement) //object spread does a shallow merge of props, so adding style prop overwrites the style prop in the function component. 
+
+	// //  adding props to function component w/o overwriting
+	// // do some destructuring to seperate out the style prop
+	// const rootElement = document.getElementById('root')
+	// function Box({style, ...rest}) {
+	// 	return (
+	// 		<div
+	// 			className="box box--small"
+	// 			style={{paddingLeft: 20, ...style}} //merges new style props with this one
+	// 			{...rest}
+	// 		/>
+	// 	)
+	// }
+	// const element = ( 
+	// 	<div>
+	// 		<Box style={{backgroundColor: 'aliceBlue'}}>small box</Box>
+	// 	</div>
+	// )
+	// ReactDOM.render(element, rootElement) //adding style prop overwrites the style prop in the function component
+
+	// // now let's do that for className
+	// const rootElement = document.getElementById('root')
+	// // add a default value to the className prop to avoid an undefined making its way into the class list of the component
+	// function Box({style, className='', ...rest}) {
+	// 	return (
+	// 		<div
+	// 			className={`box ${className}`} // use a template literal instead of a string so you can pop in a variable for interpolation
+	// 			style={{paddingLeft: 40, ...style}} //merges new style props with this one
+	// 			{...rest}
+	// 		/>
+	// 	)
+	// }
+	// const element = ( 
+	// 	<div>
+	// 		<Box className="box--small" style={{backgroundColor: 'aliceBlue'}}>small box</Box>
+	// 		<Box className="box--medium" style={{backgroundColor: 'mistyRose'}}>medium box</Box>
+	// 		<Box className="box--large" style={{backgroundColor: 'honeyDew'}}>large box</Box>
+	// 	</div>
+	// )
+	// ReactDOM.render(element, rootElement) //adding style prop overwrites the style prop in the function component
+
+	// use size prop to automatically add correct class to box of that size for maximum composability
+	const rootElement = document.getElementById('root')
+	// add a default value to the className prop to avoid an undefined making its way into the class list of the component
+	function Box({style, size, className='', ...rest}) {
+		const sizeClassName = size ? `box--${size}` : ''
+		return (
+			<div
+
+				className={`box ${sizeClassName} ${className}`} // use a template literal instead of a string so you can pop in a variable for interpolation
+				style={{paddingLeft: 40, ...style}} //merges new style props with this one
+				{...rest}
+			/>
+		)
+	}
+	const element = ( 
+		<div>
+			<Box size="small" style={{backgroundColor: 'aliceBlue'}}>small box</Box>
+			<Box size="medium" style={{backgroundColor: 'mistyRose'}}>medium box</Box>
+			<Box size="large" style={{backgroundColor: 'honeyDew'}}>large box</Box>
+		</div>
+	)
+	ReactDOM.render(element, rootElement) //adding style prop overwrites the style prop in the function component
+
+
+
+
 </script>
