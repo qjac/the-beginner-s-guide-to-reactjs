@@ -83,9 +83,45 @@
 	// 04
 	// Validate Custom React Component Props with PropTypes
 
+	// no vlaidation
+	// const rootElement = document.getElementById('root')
+	// // this is a function component
+	// function SayHello(props) {
+	// 	return (
+	// 		<div>
+	// 		Hello {props.firstName} {props.lastName}!
+	// 		</div>
+	// 	)};
+
+	// // it's expecting the prop to be a string not a boolean. results in incorrect rendering
+	// ReactDOM.render(<SayHello firstName={true} />, rootElement)
+
+	// // with validation
+	// const rootElement = document.getElementById('root')
+	// function SayHello(props) {
+	// 	return (
+	// 		<div>
+	// 		Hello {props.firstName} {props.lastName}!
+	// 		</div>
+	// 	)};
+
+	// 	// validate proptypes
+	// SayHello.propTypes = {
+	// 	firstName(props, propName, componentName) {
+	// 		if(typeof props[propName] !== 'string') {
+	// 			return new Error(
+	// 				`Pass a string for ${propName} in ${componentName}. You passed a ${typeof props[propName]}`
+	// 				)
+	// 		}
+	// 	}
+	// }
+
+	// // it's expecting the prop to be a string not a boolean. results in incorrect rendering
+	// ReactDOM.render(<SayHello firstName={true} />, rootElement)
+
+	// validate multiple props for correct proptype. pull it out into a function.
 	const rootElement = document.getElementById('root')
 
-	// this is a function component
 	function SayHello(props) {
 		return (
 			<div>
@@ -94,15 +130,20 @@
 		)};
 
 
-		// validate proptypes
-	SayHello.propTypes = {
-		firstName(props, propName, componentName) {
+	// validate all string proptypes using function
+	const PropTypes = {
+		string(props, propName, componentName) {
 			if(typeof props[propName] !== 'string') {
 				return new Error(
-					`Pass a string for ${propName} in ${componentName}. You passed a ${typeof props[propName]}`
-					)
+					`Pass a string for ${propName} in ${componentName}. You passed a ${typeof props[propName]}!`
+				)
 			}
-		}
+		},
+	}
+
+	SayHello.propTypes = {
+		firstName: PropTypes.string,
+		lastName: PropTypes.string,
 	}
 
 	// it's expecting the prop to be a string not a boolean. results in incorrect rendering
