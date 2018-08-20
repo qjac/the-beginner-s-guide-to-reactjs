@@ -18,6 +18,7 @@
 	// console.log(element)
 	// ReactDOM.render(element, rootElement)
 
+	
 	// 02
 	// create element the jsx way
 	// jsx needs to be transpiled, usually would be transpiled as part of build process
@@ -35,6 +36,7 @@
 	// const element = <div {...props} />
 	// ReactDOM.render(element, rootElement)
 
+	
 	// 03
 	// create simple reusable react component using function call
 	// const rootElement = document.getElementById('root')
@@ -64,17 +66,36 @@
 
 
 	// create simple reusable component with easier to read jsx using children instead of props
+	// const rootElement = document.getElementById('root')
+
+	// const Message = props => <div>{props.children}</div>
+	// const element = (
+	// 	<div className="container">
+	// 	<Message>
+	// 		Hello World
+	// 		<Message>Goodbye World</Message>
+	// 	</Message>
+	// 	</div>
+	// );
+	// ReactDOM.render(element, rootElement);
+
+	
+	// 04
+	// Validate Custom React Component Props with PropTypes
+
 	const rootElement = document.getElementById('root')
 
-	const Message = props => <div>{props.children}</div>
-	const element = (
-		<div className="container">
-		<Message>
-			Hello World
-			<Message>Goodbye World</Message>
-		</Message>
-		</div>
-	);
-	ReactDOM.render(element, rootElement);
+	// this is a function component
+	function SayHello(props) {
+		return (
+			<div>
+			Hello {props.firstName} {props.lastName}!
+			</div>
+		)};
+
+	// it's expecting the prop to be a string not a boolean. results in incorrect rendering
+	ReactDOM.render(<SayHello firstName={true} />, rootElement)
+
+
 
 </script>
