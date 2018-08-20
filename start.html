@@ -4,7 +4,8 @@
 <script src="https://unpkg.com/prop-types@15.6.0/prop-types.js"></script>
 <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
 <script type="text/babel">
-	// 01
+// 01
+// Create HTML elements with React's createElement API
 	// create element with vanilla js
 	// const rootElement = document.getElementById('root')
 	// const element = document.createElement('div')
@@ -20,7 +21,8 @@
 	// ReactDOM.render(element, rootElement)
 
 	
-	// 02
+// 02
+// Replace React createElement Function Call with JSX
 	// create element the jsx way
 	// jsx needs to be transpiled, usually would be transpiled as part of build process
 	// this time we'll be importing babel in a script tag
@@ -38,8 +40,9 @@
 	// ReactDOM.render(element, rootElement)
 
 	
-	// 03
-	// create simple reusable react component using function call
+// 03
+// Create a Simple Reusable React Component
+	// 	using function call
 	// const rootElement = document.getElementById('root')
 
 	// const message = (props) => <div>{props.msg}</div>
@@ -81,8 +84,8 @@
 	// ReactDOM.render(element, rootElement);
 
 	
-	// 04
-	// Validate Custom React Component Props with PropTypes
+// 04
+// Validate Custom React Component Props with PropTypes
 
 	// no vlaidation
 	// const rootElement = document.getElementById('root')
@@ -172,31 +175,59 @@
 	// // results in incorrect rendering. should throw an error.
 	// ReactDOM.render(<SayHello firstName={true} />, rootElement)
 
-// now with class component instead of function component. same great validating.
-	const rootElement = document.getElementById('root')
+	// now with class component instead of function component. same great validating.
+	// const rootElement = document.getElementById('root')
 
-	class SayHello extends React.Component {
-		 // works the same as having protype validated seperately, but more common to have it as static method in class component
-		static propTypes = {
-			firstName: PropTypes.string.isRequired,
-			lastName: PropTypes.string.isRequired,
-		}
-		render() {
-			const {firstName, lastName} = this.props
+	// class SayHello extends React.Component {
+	// 	 // works the same as having protype validated seperately, but more common to have it as static method in class component
+	// 	static propTypes = {
+	// 		firstName: PropTypes.string.isRequired,
+	// 		lastName: PropTypes.string.isRequired,
+	// 	}
+	// 	render() {
+	// 		const {firstName, lastName} = this.props
 		
-		return (
-			<div>
-			Hello {firstName} {lastName}!
-			</div>
-		)}
-	}
+	// 	return (
+	// 		<div>
+	// 		Hello {firstName} {lastName}!
+	// 		</div>
+	// 	)}
+	// }
 
-	// it's expecting the prop to be a string not a boolean. 
-	// results in incorrect rendering. should throw an error.
-	ReactDOM.render(<SayHello firstName={true} />, rootElement)
+	// // it's expecting the prop to be a string not a boolean. 
+	// // results in incorrect rendering. should throw an error.
+	// ReactDOM.render(<SayHello firstName={true} />, rootElement)
 
 	// propType checking only works with dev version of react. it's turned off for production to speed up app.
 	// can add babel-plugin-transform-react-remove-prop-types to build step to automatically remove proptype checking code from codebase in production to speed it up further.
 
+// 05
+// Conditionally Render a React Component
+	// renders even if message content is null (renders empty div)
+	// function Message({message}) {
+	// 	return <div>{message}</div>
+	// }
+	// ReactDOM.render(<Message message={null} />,
+	// document.getElementById('root'))
+
+	// render conditionally
+	// function Message({message}) {
+	// 	if (!message) {return <div>No message</div>}
+	// 	return <div>{message}</div>
+	// }
+	// ReactDOM.render(<Message message={null} />,
+	// document.getElementById('root'))
+
+	// with ternary and wrapped in a div
+	function Message({message}) {
+		return (
+			<div>
+			{message ? (<div>{message}</div>) : (<div>No message</div>)}
+			</div>
+		)
+	}
+	
+	ReactDOM.render(<Message message="{null}" />,
+	document.getElementById('root'))
 
 </script>
